@@ -1,0 +1,37 @@
+You are a senior RTL bug annotation reviewer.
+
+Review whether the generated bug_desc and fix_hint are supported by the provided evidence.
+
+## Case JSON
+{{CASE_JSON}}
+
+## Generated Annotation JSON
+{{GENERATED_JSON}}
+
+## Checks
+1. evidence_supported: Are bug_desc and fix_hint supported by the PR, issue, commit, spec, and patch evidence?
+2. bug_desc_quality: Does bug_desc describe trigger condition, observable failure, and root-cause scope in 2-4 sentences?
+3. fix_hint_quality: Does fix_hint describe a high-level repair direction in 1-2 sentences?
+4. no_patch_copying: Does the output avoid copying patch code or full diff blocks?
+5. no_hallucination: Does the output avoid unsupported tests, logs, protocol rules, or module behavior?
+6. patch_evidence_valid: Is patch_text raw unified diff or selected raw diff hunks, rather than only a natural-language patch summary?
+
+## Output
+Return valid JSON only, with exactly this schema:
+
+{
+  "passed": true,
+  "checks": {
+    "evidence_supported": true,
+    "bug_desc_quality": true,
+    "fix_hint_quality": true,
+    "no_patch_copying": true,
+    "no_hallucination": true,
+    "patch_evidence_valid": true
+  },
+  "reasoning": "one sentence summary",
+  "revised": {
+    "bug_desc": "...",
+    "fix_hint": "..."
+  }
+}
